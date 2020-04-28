@@ -1,0 +1,728 @@
+#VRML_SIM R2020a utf8
+WorldInfo {
+  basicTimeStep 3
+  contactProperties [
+    ContactProperties {
+      material1 "THREESTEPS"
+      coulombFriction [
+        0
+      ]
+    }
+    ContactProperties {
+      material1 "THREESTEPS"
+      coulombFriction [
+        1.5
+      ]
+      bounce 0.1
+    }
+  ]
+}
+Viewpoint {
+  orientation -0.05536358459173982 0.9863754857109773 0.15491376533280338 2.5070818196450744
+  position 1.4108914624589155 1.0506361219970621 -1.790963964254765
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+Floor {
+  tileSize 2 2
+}
+DEF Robot Robot {
+  translation 6.97512e-06 0.38 3.3168e-09
+  rotation 0.006057890790184363 0.3105352977334694 -0.950542545507964 -1.516283291980785e-05
+  children [
+    Accelerometer {
+      name "ACCELEROMETER"
+    }
+    DEF BODY_SHAPE Shape {
+      appearance PBRAppearance {
+        baseColor 1 1 0
+        transparency 0.9
+        metalness 0
+      }
+      geometry Box {
+        size 0.3 0.1 0.6
+      }
+      castShadows FALSE
+    }
+    Transform {
+      translation 0.15 0 -0.25
+      children [
+        HingeJoint {
+          jointParameters HingeJointParameters {
+            position -3.5246799920169243e-06
+            axis 0 0 1
+          }
+          device [
+            PositionSensor {
+              name "BL0 position sensor"
+            }
+            RotationalMotor {
+              name "BL0 rotational motor"
+              controlPID 45 1 0
+              maxVelocity 1000
+              minPosition -1
+              maxPosition 1
+              maxTorque 2000
+            }
+          ]
+          endPoint Solid {
+            translation 5.367071495062347e-06 0.00046114142579437305 -2.980325601356767e-05
+            rotation 0.999999999989606 3.2918446308178856e-06 -3.1546452836545594e-06 1.570806737779762
+            children [
+              DEF FL0_SHAPE Shape {
+                appearance PBRAppearance {
+                  metalness 0
+                }
+                geometry Cylinder {
+                  height 0.05
+                  radius 0.025
+                }
+                castShadows FALSE
+              }
+              Transform {
+                children [
+                  HingeJoint {
+                    jointParameters HingeJointParameters {
+                      position 0.5252863280560458
+                      minStop -0.55
+                      maxStop 1.7
+                    }
+                    device [
+                      PositionSensor {
+                        name "BL1 position sensor"
+                      }
+                      RotationalMotor {
+                        name "BL1 rotational motor"
+                        controlPID 370 1 0
+                        maxVelocity 1000
+                        minPosition -1
+                        maxPosition 1
+                        maxTorque 2000
+                      }
+                    ]
+                    endPoint Solid {
+                      translation 0 -0.050249979398815814 0.08658860080924784
+                      rotation 1 0 0 2.0960863280560447
+                      children [
+                        DEF FL1_SHAPE Shape {
+                          appearance PBRAppearance {
+                            baseColor 0 1 1
+                            metalness 0
+                          }
+                          geometry Capsule {
+                            height 0.2
+                            radius 0.02
+                          }
+                          castShadows FALSE
+                        }
+                        Transform {
+                          translation 0 0.1 0
+                          children [
+                            HingeJoint {
+                              jointParameters HingeJointParameters {
+                                position -1.0508630434665311
+                                minStop -2.2
+                                maxStop -0.05
+                              }
+                              device [
+                                PositionSensor {
+                                  name "BL2 position sensor"
+                                }
+                                RotationalMotor {
+                                  name "BL2 rotational motor"
+                                  controlPID 370 1 0
+                                  maxVelocity 1000
+                                  maxTorque 2000
+                                }
+                              ]
+                              endPoint Solid {
+                                translation 0 0.051958322444974336 -0.08553742174974562
+                                rotation -1 -1.4338249971516117e-09 -2.118141681553584e-11 1.0480630434687355
+                                children [
+                                  DEF FL2_SHAPE Shape {
+                                    appearance PBRAppearance {
+                                      baseColor 0 0 0
+                                      transparency 0.5
+                                      metalness 0
+                                    }
+                                    geometry Cylinder {
+                                      height 0.2
+                                      radius 0.02
+                                    }
+                                    castShadows FALSE
+                                  }
+                                  Transform {
+                                    translation 0 0.1 0
+                                    children [
+                                      DEF FL_FOOT Shape {
+                                        appearance PBRAppearance {
+                                          baseColor 0 0 0
+                                          metalness 0
+                                        }
+                                        geometry Sphere {
+                                          radius 0.04
+                                          subdivision 2
+                                        }
+                                      }
+                                      TouchSensor {
+                                        rotation 1 0 0 -1.0472003061004251
+                                        name "BL touch sensor"
+                                        boundingObject USE FL_FOOT
+                                        physics Physics {
+                                          density -1
+                                          mass 0.01
+                                        }
+                                        type "force"
+                                        lookupTable [
+                                          0 0 0
+                                          5000 50000 500
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                                boundingObject USE FL2_SHAPE
+                                physics Physics {
+                                  density -1
+                                  mass 1
+                                }
+                              }
+                            }
+                          ]
+                          rotationStep 0.262
+                        }
+                      ]
+                      boundingObject USE FL1_SHAPE
+                      physics Physics {
+                        density -1
+                        mass 1
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+            name "solid(4)"
+            boundingObject USE FL0_SHAPE
+            physics Physics {
+              density -1
+              mass 0.5
+            }
+          }
+        }
+      ]
+    }
+    Transform {
+      translation -0.15 0 -0.25
+      children [
+        HingeJoint {
+          jointParameters HingeJointParameters {
+            position -3.5246799920169243e-06
+            axis 0 0 1
+          }
+          device [
+            PositionSensor {
+              name "BR0 position sensor"
+            }
+            RotationalMotor {
+              name "BR0 rotational motor"
+              controlPID 45 1 0
+              maxVelocity 1000
+              minPosition -1
+              maxPosition 1
+              maxTorque 2000
+            }
+          ]
+          endPoint Solid {
+            translation 4.712227293661649e-06 7.190865706646788e-05 4.818443833126848e-06
+            rotation 0.9999999999879674 2.2830937738182346e-06 -4.341984833358418e-06 1.5707896719418484
+            children [
+              DEF FL0_SHAPE Shape {
+                appearance PBRAppearance {
+                  metalness 0
+                }
+                geometry Cylinder {
+                  height 0.05
+                  radius 0.025
+                }
+                castShadows FALSE
+              }
+              Transform {
+                children [
+                  HingeJoint {
+                    jointParameters HingeJointParameters {
+                      position 0.5252863280560458
+                      minStop -0.55
+                      maxStop 1.7
+                    }
+                    device [
+                      PositionSensor {
+                        name "BR1 position sensor"
+                      }
+                      RotationalMotor {
+                        name "BR1 rotational motor"
+                        controlPID 370 1 0
+                        maxVelocity 1000
+                        maxTorque 2000
+                      }
+                    ]
+                    endPoint Solid {
+                      translation 0 -0.0502499793988156 0.08658860080924746
+                      rotation 1 0 0 2.0960863280560407
+                      children [
+                        DEF FL1_SHAPE Shape {
+                          appearance PBRAppearance {
+                            baseColor 0 1 1
+                            metalness 0
+                          }
+                          geometry Capsule {
+                            height 0.2
+                            radius 0.02
+                          }
+                          castShadows FALSE
+                        }
+                        Transform {
+                          translation 0 0.1 0
+                          children [
+                            HingeJoint {
+                              jointParameters HingeJointParameters {
+                                position -1.0508630434665311
+                                minStop -2.2
+                                maxStop -0.05
+                              }
+                              device [
+                                PositionSensor {
+                                  name "BR2 position sensor"
+                                }
+                                RotationalMotor {
+                                  name "BR2 rotational motor"
+                                  controlPID 370 1 0
+                                  maxVelocity 1000
+                                  maxTorque 2000
+                                }
+                              ]
+                              endPoint Solid {
+                                translation 0 0.051958322444974336 -0.08553742174974562
+                                rotation -1 -1.4338249973038586e-09 -2.1181416817788867e-11 1.0480630434684182
+                                children [
+                                  DEF FL2_SHAPE Shape {
+                                    appearance PBRAppearance {
+                                      baseColor 0 0 0
+                                      transparency 0.5
+                                      metalness 0
+                                    }
+                                    geometry Cylinder {
+                                      height 0.2
+                                      radius 0.02
+                                    }
+                                    castShadows FALSE
+                                  }
+                                  Transform {
+                                    translation 0 0.1 0
+                                    children [
+                                      DEF FL_FOOT Shape {
+                                        appearance PBRAppearance {
+                                          baseColor 0 0 0
+                                          metalness 0
+                                        }
+                                        geometry Sphere {
+                                          radius 0.04
+                                          subdivision 2
+                                        }
+                                      }
+                                      TouchSensor {
+                                        rotation 1 0 0 -1.0472003061004251
+                                        name "BR touch sensor"
+                                        boundingObject USE FL_FOOT
+                                        physics Physics {
+                                          density -1
+                                          mass 0.01
+                                        }
+                                        type "force"
+                                      }
+                                    ]
+                                  }
+                                ]
+                                boundingObject USE FL2_SHAPE
+                                physics Physics {
+                                  density -1
+                                  mass 1
+                                }
+                              }
+                            }
+                          ]
+                          rotationStep 0.262
+                        }
+                      ]
+                      boundingObject USE FL1_SHAPE
+                      physics Physics {
+                        density -1
+                        mass 1
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+            name "solid(2)"
+            boundingObject USE FL0_SHAPE
+            physics Physics {
+              density -1
+              mass 0.5
+            }
+          }
+        }
+      ]
+    }
+    Transform {
+      translation -0.15 0 0.25
+      children [
+        HingeJoint {
+          jointParameters HingeJointParameters {
+            position -3.5246799920169243e-06
+            axis 0 0 1
+          }
+          device [
+            PositionSensor {
+              name "FR0 position sensor"
+            }
+            RotationalMotor {
+              name "FR0 rotational motor"
+              controlPID 45 1 0
+              maxVelocity 1000
+              maxTorque 2000
+            }
+          ]
+          endPoint Solid {
+            translation 6.16073116468153e-05 0.0006121364708533665 -6.798457252921424e-05
+            rotation 0.999999999991098 1.7071592548835754e-06 -3.858705831518065e-06 1.5708181569536241
+            children [
+              DEF FL0_SHAPE Shape {
+                appearance PBRAppearance {
+                  metalness 0
+                }
+                geometry Cylinder {
+                  height 0.05
+                  radius 0.025
+                }
+                castShadows FALSE
+              }
+              Transform {
+                children [
+                  HingeJoint {
+                    jointParameters HingeJointParameters {
+                      position 0.5252863280560458
+                      minStop -0.55
+                      maxStop 1.7
+                    }
+                    device [
+                      PositionSensor {
+                        name "FR1 position sensor"
+                      }
+                      RotationalMotor {
+                        name "FR1 rotational motor"
+                        controlPID 370 1 0
+                        maxVelocity 1000
+                        maxTorque 2000
+                      }
+                    ]
+                    endPoint Solid {
+                      translation 0 -0.05024997939881543 0.08658860080924706
+                      rotation 1 0 0 2.0960863280560407
+                      children [
+                        DEF FL1_SHAPE Shape {
+                          appearance PBRAppearance {
+                            baseColor 0 1 1
+                            metalness 0
+                          }
+                          geometry Capsule {
+                            height 0.2
+                            radius 0.02
+                          }
+                          castShadows FALSE
+                        }
+                        Transform {
+                          translation 0 0.1 0
+                          children [
+                            HingeJoint {
+                              jointParameters HingeJointParameters {
+                                position -1.0508630434665311
+                                minStop -2.2
+                                maxStop -0.05
+                              }
+                              device [
+                                PositionSensor {
+                                  name "FR2 position sensor"
+                                }
+                                RotationalMotor {
+                                  name "FR2 rotational motor"
+                                  controlPID 370 1 0
+                                  maxVelocity 1000
+                                  maxTorque 2000
+                                }
+                              ]
+                              endPoint Solid {
+                                translation 0 0.05195832244497419 -0.0855374217497454
+                                rotation -1 -1.4338249971387387e-09 -2.1181416815350484e-11 1.0480630434687355
+                                children [
+                                  DEF FL2_SHAPE Shape {
+                                    appearance PBRAppearance {
+                                      baseColor 0 0 0
+                                      transparency 0.5
+                                      metalness 0
+                                    }
+                                    geometry Cylinder {
+                                      height 0.2
+                                      radius 0.02
+                                    }
+                                    castShadows FALSE
+                                  }
+                                  Transform {
+                                    translation 0 0.1 0
+                                    children [
+                                      DEF FL_FOOT Shape {
+                                        appearance PBRAppearance {
+                                          baseColor 0 0 0
+                                          metalness 0
+                                        }
+                                        geometry Sphere {
+                                          radius 0.04
+                                          subdivision 2
+                                        }
+                                      }
+                                      TouchSensor {
+                                        rotation 1 0 0 -1.0472003061004251
+                                        name "FR touch sensor"
+                                        boundingObject USE FL_FOOT
+                                        physics Physics {
+                                          density -1
+                                          mass 0.01
+                                        }
+                                        type "force"
+                                      }
+                                    ]
+                                  }
+                                ]
+                                boundingObject USE FL2_SHAPE
+                                physics Physics {
+                                  density -1
+                                  mass 1
+                                }
+                              }
+                            }
+                          ]
+                          rotationStep 0.262
+                        }
+                      ]
+                      boundingObject USE FL1_SHAPE
+                      physics Physics {
+                        density -1
+                        mass 1
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+            name "solid(1)"
+            boundingObject USE FL0_SHAPE
+            physics Physics {
+              density -1
+              mass 0.5
+            }
+          }
+        }
+      ]
+    }
+    Transform {
+      translation 0.15 0 0.25
+      children [
+        HingeJoint {
+          jointParameters HingeJointParameters {
+            position -3.5246799920169243e-06
+            axis 0 0 1
+          }
+          device [
+            PositionSensor {
+              name "FL0 position sensor"
+            }
+            RotationalMotor {
+              name "FL0 rotational motor"
+              controlPID 45 1 0
+              maxVelocity 1000
+              maxTorque 2000
+            }
+          ]
+          endPoint Solid {
+            translation 4.220842203408633e-06 -0.00017648530832019754 0.000233357426533781
+            rotation 0.9999998893969643 0.0003413487241167228 -0.0003235538722302576 1.5708540163474336
+            children [
+              DEF FL0_SHAPE Shape {
+                appearance PBRAppearance {
+                  metalness 0
+                }
+                geometry Cylinder {
+                  height 0.05
+                  radius 0.025
+                }
+                castShadows FALSE
+              }
+              Transform {
+                children [
+                  HingeJoint {
+                    jointParameters HingeJointParameters {
+                      position 0.5252863280560458
+                      minStop -0.55
+                      maxStop 1.7
+                    }
+                    device [
+                      PositionSensor {
+                        name "FL1 position sensor"
+                      }
+                      RotationalMotor {
+                        name "FL1 rotational motor"
+                        controlPID 370 1 0
+                        maxVelocity 1000
+                        maxTorque 2000
+                      }
+                    ]
+                    endPoint Solid {
+                      translation 0 -0.05024997939881574 0.08658860080924792
+                      rotation 1 0 0 2.0960863280560447
+                      children [
+                        DEF FL1_SHAPE Shape {
+                          appearance PBRAppearance {
+                            baseColor 0 1 1
+                            metalness 0
+                          }
+                          geometry Capsule {
+                            height 0.2
+                            radius 0.02
+                          }
+                          castShadows FALSE
+                        }
+                        Transform {
+                          translation 0 0.1 0
+                          children [
+                            HingeJoint {
+                              jointParameters HingeJointParameters {
+                                position -1.0508630434665311
+                                minStop -2.2
+                                maxStop -0.05
+                              }
+                              device [
+                                PositionSensor {
+                                  name "FL2 position sensor"
+                                }
+                                RotationalMotor {
+                                  name "FL2 rotational motor"
+                                  controlPID 370 1 0
+                                  maxVelocity 1000
+                                  maxTorque 2000
+                                }
+                              ]
+                              endPoint Solid {
+                                translation 0 0.051958322444974336 -0.08553742174974562
+                                rotation -1 -1.4338249969923389e-09 -2.1181416813188172e-11 1.0480630434690528
+                                children [
+                                  DEF FL2_SHAPE Shape {
+                                    appearance PBRAppearance {
+                                      baseColor 0 0 0
+                                      transparency 0.5
+                                      metalness 0
+                                    }
+                                    geometry Cylinder {
+                                      height 0.2
+                                      radius 0.02
+                                    }
+                                    castShadows FALSE
+                                  }
+                                  Transform {
+                                    translation 0 0.1 0
+                                    children [
+                                      DEF FL_FOOT Shape {
+                                        appearance PBRAppearance {
+                                          baseColor 0 0 0
+                                          metalness 0
+                                        }
+                                        geometry Sphere {
+                                          radius 0.04
+                                          subdivision 2
+                                        }
+                                      }
+                                      TouchSensor {
+                                        rotation 1 0 0 -1.0472003061004251
+                                        name "FL touch sensor"
+                                        boundingObject USE FL_FOOT
+                                        physics Physics {
+                                          density -1
+                                          mass 0.01
+                                        }
+                                        type "force"
+                                        lookupTable [
+                                          0 0 0
+                                          5000 50000 500
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                                boundingObject USE FL2_SHAPE
+                                physics Physics {
+                                  density -1
+                                  mass 1
+                                }
+                              }
+                            }
+                          ]
+                          rotationStep 0.262
+                        }
+                      ]
+                      boundingObject USE FL1_SHAPE
+                      physics Physics {
+                        density -1
+                        mass 1
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+            name "solid(3)"
+            boundingObject USE FL0_SHAPE
+            physics Physics {
+              density -1
+              mass 0.5
+            }
+          }
+        }
+      ]
+    }
+    InertialUnit {
+      translation -6.362582630762203e-13 -4.414499965577079e-08 -4.0534315675068254e-15
+      rotation 0 0.9701425001453319 0.24253562503633297 1.04081818756691e-28
+      children [
+        Shape {
+          geometry Box {
+            size 0.05 0.05 0.05
+          }
+          castShadows FALSE
+        }
+      ]
+      boundingObject USE BODY_SHAPE
+      physics Physics {
+        density -1
+        mass 0.01
+      }
+    }
+  ]
+  boundingObject USE BODY_SHAPE
+  physics Physics {
+    density -1
+    mass 50
+  }
+  controller "one_leg"
+  supervisor TRUE
+}
